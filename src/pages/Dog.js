@@ -1,17 +1,20 @@
 import React from 'react';
+import Page from '../components/Page'
 
 export default class Dog extends React.Component {
-constructor(props)
+    constructor(props)
     {
         super(props);
     }
-
     render()
     {
         return(
-            <div> DOG
-
-            </div>
+            <Page>
+                <p>Enter Your Bad Dog Name</p>
+                <form>
+                    <input type='text' />
+                </form>
+            </Page>
         )
     }
 }

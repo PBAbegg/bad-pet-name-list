@@ -15,9 +15,6 @@ export default class Header extends React.Component {
         return(
             <header className='main-header'>
                 <Navigation />
-                <Dog />
-                <Cat />
-                <Fish />
             </header>
         )
     }

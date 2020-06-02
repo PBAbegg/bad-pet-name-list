@@ -10,11 +10,12 @@ constructor(props)
     render()
     {
         return(
-            <section className="page-wrapper">
+        <section className="page-wrapper">
 
             <Header />
+            {this.props.children}
       
-          </section>
+        </section>
         );
     }
 }
