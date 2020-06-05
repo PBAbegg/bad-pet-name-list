@@ -12,7 +12,13 @@ export default class Fish extends React.Component {
             <Page>
                 <p>Enter Your Bad Fish Name</p>
                 <form>
-                    <input type='text' />
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"></input>
+                    <label for="species">Species:</label>
+                    <input type="text" id="species" name="species"></input>
+                    <label for="color">color:</label>
+                    <input type="text" id="color" name="color"></input>
+                    <input type="submit" value="Submit"></input>
                 </form>
             </Page>
         )

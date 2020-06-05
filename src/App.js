@@ -25,12 +25,13 @@ class App extends Component{
     return(
       <Router>
           <h1>Home for Bad Pet Names</h1>
-          <p>home info</p>
+          <p>tag line</p>
         <Nav>
           <p>pet names</p>
-          <Link to="/cat">All The Cat Names</Link>
-          <Link to="/dog">All The Dog Names</Link>
-          <Link to="/fish">All The Fish Names</Link>
+          <Link to="/">Home</Link>
+          <Link to="/cat">Cat Names</Link>
+          <Link to="/dog">Dog Names</Link>
+          <Link to="/fish">Fish Names</Link>
         </Nav>
 
         <Switch>
