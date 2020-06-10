@@ -2,7 +2,7 @@ import React from 'react';
 import Page from '../components/Page'
 
 export default class Cat extends React.Component {
-constructor(props)
+    constructor(props)
     {
         super(props);
         
@@ -16,16 +16,29 @@ constructor(props)
     handleSubmit = (event) =>
     {
         event.preventDefault();
+        const data = this.state
+        console.log(data)
+
+        let post = {
+            method: 'POST'
+        }
         
     };
 
-    // changeHandler = (event) =>
-    // {
-    //     const fieldName = event.target.getAttribute('name');
-    //     const stateObj = {};
-    //     stateObj[fieldName] = event.target.value;
+    handleInputChange = (event) => 
+    {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    };
 
-    // };
+    componentDidMount (){
+        this.setState({
+            name: '',
+            species: '',
+            color: '',            
+        })
+    }
        
     render()
     {
@@ -34,11 +47,11 @@ constructor(props)
                 <p>Enter Your Bad Cat Name</p>
                 <form onSubmit={this.handleSubmit}>
                     <label for="name">Name:</label>
-                    <input autocomplete="off" type="text" id="name" name="name" value={this.state.name} changeHandler={this.changeHandler}></input>
+                    <input autocomplete="off" type="text" id="name" name="name" onChange={this.handleInputChange}></input>
                     <label for="species">Species:</label>
-                    <input autocomplete="off" type="text" id="species" name="species"></input>
+                    <input autocomplete="off" type="text" id="species" name="species" onChange={this.handleInputChange}></input>
                     <label for="color">color:</label>
-                    <input autocomplete="off" type="text" id="color" name="color"></input>
+                    <input autocomplete="off" type="text" id="color" name="color" onChange={this.handleInputChange}></input>
                     <input type="submit" value="Submit"></input>
                 </form>
             </Page>
