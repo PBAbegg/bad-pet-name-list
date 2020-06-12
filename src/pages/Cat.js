@@ -7,22 +7,38 @@ export default class Cat extends React.Component {
         super(props);
         
         this.state = {
-            name: '',
-            species: '',
-            color: '',
+            catName: '',
+            catSpecies: '',
+            catColor: '',
         };
     };
 
-    handleSubmit = (event) =>
+    handleChange = (event) =>
     {
         event.preventDefault();
-        const data = this.state
-        console.log(data)
+        this.addName.reset();
 
-        let post = {
-            method: 'POST'
-        }
-        
+        const fetchOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(this.state),
+        };
+
+        console.log(fetchOptions);
+
+        // send data to api
+        const route = 'http://localhost:3030/api/cat'
+        fetch(route, fetchOptions)
+        .then((response) =>
+        {
+            return response.json();
+        })
+        .catch((err) => 
+        {
+            console.log('Error posting a name is: ', err);
+        })
     };
 
     handleInputChange = (event) => 
@@ -34,10 +50,20 @@ export default class Cat extends React.Component {
 
     componentDidMount (){
         this.setState({
-            name: '',
-            species: '',
-            color: '',            
+            catName: '',
+            catSpecies: '',
+            catColor: '',            
         })
+    }
+
+    changeHandler = (event) =>
+    {
+        const fieldName = event.target.getAttribute('name');
+        const stateObj = {};
+        stateObj[fieldName] = event.target.value;
+        stateObj.feedbackMessage = '';
+        stateObj.feedbackType = '';
+        this.setState(stateObj);
     }
        
     render()
@@ -45,13 +71,19 @@ export default class Cat extends React.Component {
         return(
             <Page>
                 <p>Enter Your Bad Cat Name</p>
-                <form onSubmit={this.handleSubmit}>
-                    <label for="name">Name:</label>
-                    <input autocomplete="off" type="text" id="name" name="name" onChange={this.handleInputChange}></input>
-                    <label for="species">Species:</label>
-                    <input autocomplete="off" type="text" id="species" name="species" onChange={this.handleInputChange}></input>
-                    <label for="color">color:</label>
-                    <input autocomplete="off" type="text" id="color" name="color" onChange={this.handleInputChange}></input>
+                <form ref={input => this.addName = input} onSubmit={this.handleChange}>
+                    <label>Name:</label>
+                    <input autoComplete="off" type="text" id="name" name="catName" 
+                    onChange={this.handleInputChange}></input>
+
+                    <label>Species:</label>
+                    <input autoComplete="off" type="text" id="species" name="catSpecies" 
+                    onChange={this.handleInputChange}></input>
+
+                    <label>color:</label>
+                    <input autoComplete="off" type="text" id="color" name="catColor" 
+                    onChange={this.handleInputChange}></input>
+                    
                     <input type="submit" value="Submit"></input>
                 </form>
             </Page>

@@ -14,17 +14,35 @@ export default class Home extends React.Component {
         }
     }
 
-    handleAddedCat = (cat) => 
+    fetchCats = () =>
     {
-        this.setState({ cats: [...this.state.cats, cat] })
-    }
-
-    getCats() {
-
+        let route = 'http://localhost:3030/api/cat';
+        fetch(route)
+        .then((response) =>
+        {
+            return response.json();
+        })
+        .then((data) =>
+        {
+            this.setState({
+                cats: data,
+                catData: data.map((catName, catSpecies, catColor) =>
+                {
+                    return
+                    {this.state.cats.map(cat => (
+                        <ul key={`cat ${cat._id}`}>
+                            <li>{cat.catName}</li>
+                            <li>{cat.catSpecies}</li>
+                            <li>{cat.catColor}</li>
+                        </ul>
+                    ))}
+                })
+            })
+        })
     }
 
     componentDidMount(){
-        
+
     }
 
     render()
@@ -34,11 +52,12 @@ export default class Home extends React.Component {
                 Home info
                 <div>
                     Cat Names
+                    {/* Cat */}
                     {this.state.cats.map(cat => (
                         <ul key={`cat ${cat._id}`}>
-                            <li>{cat.name}</li>
-                            <li>{cat.species}</li>
-                            <li>{cat.color}</li>
+                            <li>{cat.catName}</li>
+                            <li>{cat.catSpecies}</li>
+                            <li>{cat.catColor}</li>
                         </ul>
                     ))}
                 </div>
