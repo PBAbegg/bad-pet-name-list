@@ -1,7 +1,7 @@
 import React from 'react';
-import Cat from './Cat';
-import Dog from './Dog';
-import Fish from './Fish';
+import { Link } from 'react-router-dom';
+import UpdateCat from './UpdateCat'
+
 
 export default class Home extends React.Component {
     constructor(props)
@@ -9,6 +9,7 @@ export default class Home extends React.Component {
         super(props);
         this.state = {
             cats: [],
+            catData: " ",
             dogs: [],
             fish: []
         }
@@ -26,24 +27,36 @@ export default class Home extends React.Component {
         {
             this.setState({
                 cats: data,
-                catData: data.map((catName, catSpecies, catColor) =>
+                catData: data.map((cat,i) =>
                 {
-                    return
-                    {this.state.cats.map(cat => (
-                        <ul key={`cat ${cat._id}`}>
-                            <li>{cat.catName}</li>
-                            <li>{cat.catSpecies}</li>
-                            <li>{cat.catColor}</li>
-                        </ul>
-                    ))}
-                })
+                return (<ul key={`cat_${cat._id}`}>{`${cat.catName}, ${cat.catSpecies}, ${cat.catColor}`} 
+                        <button onClick={this.deleteCat} value={cat._id}>x</button>
+                        <Link to={{pathname:'/updatecat', catID:cat._id}} >Update</Link>
+                    </ul>)
+                })             
             })
         })
     }
 
-    componentDidMount(){
+    deleteCat = (event) =>
+    {
+        let route = 'http://localhost:3030/api/cat/' + event.target.value;
+        let fetchOptions = {method: 'DELETE'}
+        console.log(route)
+        fetch(route, fetchOptions)
+        .then((response) =>
+        {
+            return response.json();
+        })
+        .then(() => 
+        {
+            this.fetchCats()
+        }) 
+    };
 
-    }
+    componentDidMount(){
+        this.fetchCats()
+    };
 
     render()
     {
@@ -52,14 +65,7 @@ export default class Home extends React.Component {
                 Home info
                 <div>
                     Cat Names
-                    {/* Cat */}
-                    {this.state.cats.map(cat => (
-                        <ul key={`cat ${cat._id}`}>
-                            <li>{cat.catName}</li>
-                            <li>{cat.catSpecies}</li>
-                            <li>{cat.catColor}</li>
-                        </ul>
-                    ))}
+                    {this.state.catData}
                 </div>
                 <div>
                     Dog Names
@@ -69,6 +75,6 @@ export default class Home extends React.Component {
                 </div>
             </div>
         )
-    }
+    };
 }
 

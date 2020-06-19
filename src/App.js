@@ -11,6 +11,7 @@ import './App.css';
 import Page from './components/Page';
 import Home from './pages/Home';
 import Cat from './pages/Cat';
+import UpdateCat from './pages/UpdateCat'
 import Dog from './pages/Dog';
 import Fish from './pages/Fish';
 
@@ -24,10 +25,9 @@ class App extends Component{
   {
     return(
       <Router>
-          <h1>Home for Bad Pet Names</h1>
-          <p>tag line</p>
-        <Nav>
-          <p>pet names</p>
+          <h1 className="App">Home for Bad Pet Names</h1>
+          <p className="App">tag line</p>
+        <Nav className="Link">
           <Link to="/">Home</Link>
           <Link to="/cat">Cat Names</Link>
           <Link to="/dog">Dog Names</Link>
@@ -37,6 +37,7 @@ class App extends Component{
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/cat" component={Cat} />
+          <Route exact path="/updatecat" component={UpdateCat} />
           <Route path="/dog" component={Dog} />
           <Route path="/fish" component={Fish} />
         </Switch>

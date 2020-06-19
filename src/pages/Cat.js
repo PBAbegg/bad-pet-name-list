@@ -1,15 +1,17 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import Page from '../components/Page'
+
 
 export default class Cat extends React.Component {
     constructor(props)
     {
         super(props);
-        
         this.state = {
             catName: '',
             catSpecies: '',
             catColor: '',
+            shouldRedirect: false,
         };
     };
 
@@ -34,6 +36,13 @@ export default class Cat extends React.Component {
         .then((response) =>
         {
             return response.json();
+        })
+        .then((data) =>
+        {
+            console.log("new cat:", data)
+            this.setState({
+                shouldRedirect: true
+            })
         })
         .catch((err) => 
         {
@@ -68,6 +77,9 @@ export default class Cat extends React.Component {
        
     render()
     {
+        if(this.state.shouldRedirect){
+            return <Redirect to="/" />
+        }
         return(
             <Page>
                 <p>Enter Your Bad Cat Name</p>
