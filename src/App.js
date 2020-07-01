@@ -6,7 +6,10 @@ import{
   Link,
   Redirect
 } from 'react-router-dom';
-import { Nav } from 'reactstrap';
+import {
+  Nav,
+  Navbar
+ } from 'reactstrap';
 import './App.css';
 import Page from './components/Page';
 import Home from './pages/Home';
@@ -25,13 +28,12 @@ class App extends Component{
   {
     return(
       <Router>
-          <h1 className="App">Home for Bad Pet Names</h1>
-          <p className="App">tag line</p>
+        <h1 className="App">Home for Bad Pet Names</h1>
         <Nav className="Link">
-          <Link to="/">Home</Link>
-          <Link to="/cat">Cat Names</Link>
-          <Link to="/dog">Dog Names</Link>
-          <Link to="/fish">Fish Names</Link>
+            <Link to="/">Home</Link>
+            <Link to="/cat">Cat Names</Link>
+            <Link to="/dog">Dog Names</Link>
+            <Link to="/fish">Fish Names</Link>
         </Nav>
 
         <Switch>
