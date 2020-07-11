@@ -58,6 +58,30 @@ export default class Home extends React.Component {
         this.fetchCats()
     };
 
+
+    fetchDog = () =>
+    {
+
+    }
+
+    deleteDog = (event) =>
+    {
+
+    }
+
+
+    fetchFish = () =>
+    {
+
+    }
+
+    deleteFish = (event) =>
+    {
+        
+    }
+
+
+
     render()
     {
         return(
