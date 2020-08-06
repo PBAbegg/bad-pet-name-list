@@ -11,9 +11,10 @@ export default class Home extends React.Component {
             cats: [],
             catData: " ",
             dogs: [],
+            dogData: " ",
             fish: []
         }
-    }
+    };
 
     fetchCats = () =>
     {
@@ -36,7 +37,7 @@ export default class Home extends React.Component {
                 })             
             })
         })
-    }
+    };
 
     deleteCat = (event) =>
     {
@@ -61,8 +62,26 @@ export default class Home extends React.Component {
 
     fetchDog = () =>
     {
-
-    }
+        let rout = 'http://localhost:3030/api/dog';
+        fetch(rout)
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) =>
+        {
+            this.setState({
+                dogs: data,
+                dogData: data.map((dog,i) =>
+                {
+                    return (<ul key={`dog_${dog._id}`}>{`${dog.dogName}, ${dog.dogSpecies}, ${dog.dogColor}`}
+                            <button onClick={this.deleteDog} value={dog._id}>x</button>
+                            {/* Make updatedog file */}
+                            <Link to={{pathname:'/updatedog', dogID:dog._id}} >Update</Link>
+                    </ul>)
+                })
+            })
+        })
+    };
 
     deleteDog = (event) =>
     {

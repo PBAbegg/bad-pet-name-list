@@ -13,11 +13,11 @@ export default class Fish extends React.Component {
                 <p>Enter Your Bad Fish Name</p>
                 <form>
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name"></input>
+                    <input autoComplete="off" type="text" id="name" name="name"></input>
                     <label for="species">Species:</label>
-                    <input type="text" id="species" name="species"></input>
+                    <input autoComplete="off" type="text" id="species" name="species"></input>
                     <label for="color">color:</label>
-                    <input type="text" id="color" name="color"></input>
+                    <input autoComplete="off" type="text" id="color" name="color"></input>
                     <input type="submit" value="Submit"></input>
                 </form>
             </Page>
