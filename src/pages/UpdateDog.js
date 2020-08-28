@@ -34,5 +34,35 @@ export default class UpdateDog extends React.Component {
         })
     }
 
-    
+    UpdateDog = (event) =>
+    {
+        event.preventDefault()
+        let rout = 'http://localhost:3030/api/dog/' + this.props.location.dogID;
+        const fetchOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'PUT',
+            body: JSON.stringify(this.state),
+        };
+        console.log(rout)
+        fetch(rout,fetchOptions)
+        .then((response) =>
+        {
+            return response.json();
+        })
+        .then((data) =>
+        {
+            console.log("dog update ", data);
+            this.setState({
+                shouldRedirect: true
+            });
+        })
+        .catch((err) =>
+        {
+            console.log('Error updating a dog is: ', err);
+        })
+    };
+
+
 }
