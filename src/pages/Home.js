@@ -60,7 +60,7 @@ export default class Home extends React.Component {
     };
 
 
-    fetchDog = () =>
+    fetchDogs = () =>
     {
         let rout = 'http://localhost:3030/api/dog';
         fetch(rout)
@@ -85,8 +85,23 @@ export default class Home extends React.Component {
 
     deleteDog = (event) =>
     {
+        let route = 'http://localhost:3030/api/dog/' + event.target.value;
+        let fetchOptions = {method: 'DELETE'}
+        console.log(route)
+        fetch(route, fetchOptions)
+        .then((response) =>
+        {
+            return response .json();
+        })
+        .then(() =>
+        {
+            this.fetchDogs();
+        })
+    };
 
-    }
+    componentDidMount(){
+        this.fetchDogs()
+    };
 
 
     fetchFish = () =>
